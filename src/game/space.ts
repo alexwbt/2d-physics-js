@@ -1,9 +1,11 @@
 import Camera from "./camera";
 import Object from "./object";
 import { circle } from "./object/shape";
-import { RenderContext } from "./utils/RenderContext";
+import { RenderContext } from "./utils/Context";
 
 class Space {
+
+    private gravity: number = 9.81;
 
     private objects: Object[] = [];
 
@@ -12,7 +14,8 @@ class Space {
     }
 
     public update(deltaTime: number): void {
-        
+        for (const object of this.objects)
+            object.update({ deltaTime, gravity: this.gravity });
     }
 
     public render({ canvas, ctx, camera }: RenderContext): void {

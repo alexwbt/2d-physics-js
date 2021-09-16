@@ -1,9 +1,14 @@
-import './styles/index.scss';
-import Space from './game/space';
-import Camera from './game/camera';
+import '../styles/index.scss';
+import Space from './space';
+import Camera from './camera';
 
 const instance = new Space();
 const camera = new Camera(0, 0, 0, 0);
+
+window.addEventListener('wheel', e => {
+    const dir = e.deltaY / Math.abs(e.deltaY);
+    camera.scale = Math.max(camera.scale + dir, 1);
+});
 
 const canvas = document.getElementById('main-canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d');
@@ -11,7 +16,7 @@ const ctx = canvas.getContext('2d');
 let startTime = Date.now();
 const render = () => {
     const now = Date.now();
-    const deltaTime = now - startTime;
+    const deltaTime = (now - startTime) / 1000; // delta time in seconds
 
     camera.width = canvas.width = window.innerWidth;
     camera.height = canvas.height = window.innerHeight;

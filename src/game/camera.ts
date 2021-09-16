@@ -1,7 +1,7 @@
 import { Rect, IVec2 } from "./utils/Vector";
 
 class Camera extends Rect {
-    public scale = 5;
+    public scale = 1;
 
     public screen = (pos: IVec2): IVec2 => {
         return {

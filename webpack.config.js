@@ -10,7 +10,7 @@ module.exports = ({ production }) => {
         mode: production ? "production" : "development",
         devtool: !production && "source-map",
         entry: {
-            main: "./src/index.ts"
+            main: "./src/game/index.ts"
         },
         output: {
             filename: `[name]${production ? ".[contenthash]" : ""}.js`,

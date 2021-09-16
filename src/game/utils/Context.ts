@@ -1,5 +1,9 @@
 import Camera from "../camera";
-import { IVec2 } from "./Vector";
+
+export type UpdateContext = {
+    deltaTime: number;
+    gravity: number;
+};
 
 export type RenderContext = {
     canvas: HTMLCanvasElement;
