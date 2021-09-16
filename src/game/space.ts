@@ -1,4 +1,3 @@
-import Camera from "./camera";
 import Object from "./object";
 import { circle } from "./object/shape";
 import { RenderContext } from "./utils/Context";
