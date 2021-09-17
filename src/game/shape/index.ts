@@ -1,5 +1,5 @@
-import { RenderContext } from "../utils/context";
-import { mulVec, Vec2 } from "../utils/vector";
+import { RenderContext } from "utils/context";
+import { mulVec, Vec2 } from "utils/vector";
 
 export interface IShape {
     render: (context: RenderContext) => void;

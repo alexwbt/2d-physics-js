@@ -1,6 +1,6 @@
-import '../styles/index.scss';
-import Camera from './camera';
-import Space from './space';
+import "styles/index.scss";
+import Camera from "./camera";
+import Space from "./space";
 
 const instance = new Space();
 const camera = new Camera(0, 0, 0, 0);

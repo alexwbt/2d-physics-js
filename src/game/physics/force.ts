@@ -1,4 +1,4 @@
-import { Vec2 } from "../utils/vector";
+import { Vec2 } from "utils/vector";
 
 class Force extends Vec2 {
     public time: number = 0;

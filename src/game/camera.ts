@@ -1,4 +1,4 @@
-import { Rect, IVec2 } from "./utils/vector";
+import { IVec2, Rect } from "utils/vector";
 
 class Camera extends Rect {
     public scale = 1;

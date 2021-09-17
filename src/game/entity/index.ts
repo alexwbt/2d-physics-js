@@ -1,8 +1,8 @@
-import Physics from "../physics";
-import { IShape } from "../shape";
-import { RenderContext, UpdateContext } from "../utils/context";
-import { toRadians } from "../utils/Math";
-import { Vec2 } from "../utils/vector";
+import Physics from "physics";
+import { IShape } from "shape";
+import { RenderContext, UpdateContext } from "utils/context";
+import { toRadians } from "utils/Math";
+import { Vec2 } from "utils/vector";
 
 class Entity extends Vec2 {
 

@@ -1,7 +1,7 @@
-import Entity from "./entity";
-import Force from "./physics/force";
+import Entity from "entity";
+import Force from "physics/force";
+import { RenderContext } from "utils/context";
 import { Circle } from "./shape";
-import { RenderContext } from "./utils/context";
 
 class Space {
 

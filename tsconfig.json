@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "outDir": "./build/",
+        "noImplicitAny": true,
+        "module": "es6",
+        "target": "es5",
+        "jsx": "react",
+        "allowJs": true,
+        "moduleResolution": "node",
+        "downlevelIteration": true,
+        "baseUrl": ".",
+        "paths": {
+            "entity": ["./src/game/entity"],
+            "entity/*": ["./src/game/entity/*"],
+            "physics": ["./src/game/physics"],
+            "physics/*": ["./src/game/physics/*"],
+            "shape": ["./src/game/shape"],
+            "shape/*": ["./src/game/shape/*"],
+            "utils": ["./src/game/utils"],
+            "utils/*": ["./src/game/utils/*"],
+            "styles": ["./src/styles"],
+            "styles/*": ["./src/styles/*"],
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "build"
+    ]
+}

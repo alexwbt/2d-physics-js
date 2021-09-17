@@ -1,5 +1,5 @@
-import { UpdateContext } from "../utils/context";
-import { addVec, mulVec, Vec2 } from "../utils/vector";
+import { UpdateContext } from "utils/context";
+import { addVec, mulVec, Vec2 } from "utils/vector";
 import Force from "./force";
 
 class Physics {
