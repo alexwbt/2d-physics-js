@@ -11,15 +11,15 @@ export class Vec2 implements IVec2 {
         this.x = x;
         this.y = y;
     }
-    addVec(vec: IVec2): void {
+    public addVec(vec: IVec2): void {
         this.x += vec.x;
         this.y += vec.y;
     }
-    mulVec(val: number): void {
+    public mulVec(val: number): void {
         this.x *= val;
         this.y *= val;
     }
-    devVec(val: number): void {
+    public devVec(val: number): void {
         this.x /= val;
         this.y /= val;
     }

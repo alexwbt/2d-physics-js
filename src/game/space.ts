@@ -1,28 +1,39 @@
-import Object from "./object";
-import { circle } from "./object/shape";
-import { RenderContext } from "./utils/Context";
+import Entity from "./entity";
+import Force from "./physics/force";
+import { Circle } from "./shape";
+import { RenderContext } from "./utils/context";
 
 class Space {
 
-    private gravity: number = 9.81;
+    private gravity: number = 9.81; // ms^-2
+    // private gravity: number = 0;
 
-    private objects: Object[] = [];
+    private entities: Entity[] = [];
 
     constructor() {
-        this.objects.push(new Object(0, 0, circle(10, 8)));
+        const obj1 = new Entity(0, 0, new Circle(1));
+        obj1.physics.push(new Force(0, -9.81, 0.02));
+        this.entities.push(obj1);
+
+        const obj2 = new Entity(0, 3, new Circle(1));
+        obj2.physics.push(new Force(0, -9.81, 0, true));
+        this.entities.push(obj2);
     }
 
     public update(deltaTime: number): void {
-        for (const object of this.objects)
-            object.update({ deltaTime, gravity: this.gravity });
+        for (const entity of this.entities) {
+            entity.update({ deltaTime, gravity: this.gravity });
+        }
     }
 
-    public render({ canvas, ctx, camera }: RenderContext): void {
+    public render(context: RenderContext): void {
+        const { canvas, ctx } = context;
+
         ctx.fillStyle = 'black';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        for (const object of this.objects)
-            object.render({ canvas, ctx, camera });
+        for (const entity of this.entities)
+            entity.render(context);
     }
 
 }

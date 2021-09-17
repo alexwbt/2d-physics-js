@@ -1,13 +1,14 @@
 import '../styles/index.scss';
-import Space from './space';
 import Camera from './camera';
+import Space from './space';
 
 const instance = new Space();
 const camera = new Camera(0, 0, 0, 0);
+camera.scale = 40;
 
 window.addEventListener('wheel', e => {
     const dir = e.deltaY / Math.abs(e.deltaY);
-    camera.scale = Math.max(camera.scale + dir, 1);
+    camera.scale = Math.max(camera.scale - dir, 1);
 });
 
 const canvas = document.getElementById('main-canvas') as HTMLCanvasElement;
@@ -21,7 +22,8 @@ const render = () => {
     camera.width = canvas.width = window.innerWidth;
     camera.height = canvas.height = window.innerHeight;
 
-    instance.update(deltaTime);
+    const timeScale = 0.01;
+    instance.update(deltaTime * timeScale);
     instance.render({ canvas, ctx, camera });
 
     startTime = now;
