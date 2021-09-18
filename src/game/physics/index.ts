@@ -1,5 +1,5 @@
 import { UpdateContext } from "utils/context";
-import { addVec, mulVec, Vec2 } from "utils/vector";
+import { addVec, devVec, mulVec, Vec2 } from "utils/vector";
 import Force from "./force";
 
 class Physics {
@@ -7,8 +7,9 @@ class Physics {
     private mass: number = 1;
     private forces: Force[] = [];
     private rotation: number = 0;
-    private angularVelocity: number = 0;
-    private velocity: Vec2 = new Vec2(0, 0);
+    private velocity: Vec2 = new Vec2(0, 0); // m/s
+
+    private netForce: Vec2 = new Vec2(0, 0);
 
     public push(force: Force): void {
         this.forces.push(force);
@@ -19,33 +20,33 @@ class Physics {
     }
 
     public getVelocity(): Vec2 {
-        return this.velocity;
+        return this.velocity.clone();
     }
 
-    private getNetForce(): Vec2 {
-        const output = new Vec2(0, 0);
-        if (!this.forces.length)
-            return output;
-        let count = 0;
-        for (const force of this.forces) {
-            output.addVec(force);
-            count++;
+    public getMass(): number {
+        return this.mass;
+    }
+
+    public update({ deltaTime, timeScale, gravity }: UpdateContext): void {
+        // update net force
+        this.netForce = new Vec2(0, 0);
+        if (this.forces.length > 0) {
+            let count = 0;
+            for (const force of this.forces) {
+                this.netForce.addVec(force);
+                count++;
+            }
+            this.netForce.devVec(count);
+
+            this.forces = this.forces.filter(force => {
+                force.time -= deltaTime;
+                return force.isImmortal || force.time > 0;
+            });
         }
-        output.devVec(count);
-        return output;
-    }
 
-    private getAcceleration(deltaTime: number, gravity: number = 0): Vec2 {
-        return mulVec(addVec(this.getNetForce(), new Vec2(0, gravity)), deltaTime / this.mass);
-    }
-
-    public update({ deltaTime, gravity }: UpdateContext): void {
-        this.velocity.addVec(this.getAcceleration(deltaTime, gravity));
-
-        this.forces = this.forces.filter(force => {
-            force.time -= deltaTime;
-            return force.isImmortal || force.time > 0;
-        });
+        // update velocity in m/s
+        const acceleration = mulVec(addVec(this.netForce, new Vec2(0, gravity)), timeScale / this.mass);
+        this.velocity.addVec(acceleration);
     }
 
 }

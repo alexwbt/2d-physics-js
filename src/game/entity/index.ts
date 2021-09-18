@@ -2,7 +2,7 @@ import Physics from "physics";
 import { IShape } from "shape";
 import { RenderContext, UpdateContext } from "utils/context";
 import { toRadians } from "utils/Math";
-import { Vec2 } from "utils/vector";
+import { mulVec, Vec2 } from "utils/vector";
 
 class Entity extends Vec2 {
 
@@ -16,12 +16,13 @@ class Entity extends Vec2 {
     }
 
     public update(context: UpdateContext): void {
+        const { deltaTime } = context;
         this.physics.update(context);
-        this.addVec(this.physics.getVelocity());
+        this.addVec(mulVec(this.physics.getVelocity(), deltaTime));
     }
 
     public render(context: RenderContext): void {
-        const { ctx, camera: { screen } } = context;
+        const { ctx, camera: { scale, screen }, debug } = context;
 
         const origin = screen(this);
         const rotation = toRadians(this.physics.getRotation());
@@ -30,8 +31,19 @@ class Entity extends Vec2 {
 
         this.shape.render(context);
 
-        ctx.translate(-origin.x, -origin.y);
         ctx.rotate(-rotation);
+
+        if (debug) {
+            // render velocity
+            const v = mulVec(this.physics.getVelocity(), scale);
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(v.x, v.y);
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
+        ctx.translate(-origin.x, -origin.y);
     }
 
 }

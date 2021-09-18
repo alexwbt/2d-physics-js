@@ -23,6 +23,12 @@ export class Vec2 implements IVec2 {
         this.x /= val;
         this.y /= val;
     }
+    public clone(): Vec2 {
+        return new Vec2(this.x, this.y);
+    }
+    public mag(): number {
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+    }
 }
 
 export const addVec = (v1: IVec2, v2: IVec2): Vec2 =>

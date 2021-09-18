@@ -14,6 +14,8 @@ window.addEventListener('wheel', e => {
 const canvas = document.getElementById('main-canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d');
 
+const debug = true;
+
 let startTime = Date.now();
 const render = () => {
     const now = Date.now();
@@ -22,9 +24,9 @@ const render = () => {
     camera.width = canvas.width = window.innerWidth;
     camera.height = canvas.height = window.innerHeight;
 
-    const timeScale = 0.01;
-    instance.update(deltaTime * timeScale);
-    instance.render({ canvas, ctx, camera });
+    const timeScale = 0.1;
+    instance.update(deltaTime * timeScale, timeScale);
+    instance.render({ canvas, ctx, camera, debug });
 
     startTime = now;
     window.requestAnimationFrame(render);
