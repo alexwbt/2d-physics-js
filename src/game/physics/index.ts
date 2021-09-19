@@ -27,13 +27,13 @@ class Physics {
         return this.mass;
     }
 
-    public update({ deltaTime, timeScale, gravity }: UpdateContext): void {
+    public update({ deltaTime, gravity }: UpdateContext): void {
         // update net force
         this.netForce = new Vec2(0, 0);
         if (this.forces.length > 0) {
             let count = 0;
             for (const force of this.forces) {
-                this.netForce.addVec(force);
+                this.netForce.addVec(mulVec(force, deltaTime));
                 count++;
             }
             this.netForce.devVec(count);
@@ -45,7 +45,7 @@ class Physics {
         }
 
         // update velocity in m/s
-        const acceleration = mulVec(addVec(this.netForce, new Vec2(0, gravity)), timeScale / this.mass);
+        const acceleration = mulVec(addVec(this.netForce, new Vec2(0, gravity)), this.mass);
         this.velocity.addVec(acceleration);
     }
 

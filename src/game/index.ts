@@ -24,8 +24,8 @@ const render = () => {
     camera.width = canvas.width = window.innerWidth;
     camera.height = canvas.height = window.innerHeight;
 
-    const timeScale = 0.1;
-    instance.update(deltaTime * timeScale, timeScale);
+    const timeScale = 1;
+    instance.update(deltaTime * timeScale);
     instance.render({ canvas, ctx, camera, debug });
 
     startTime = now;

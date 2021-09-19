@@ -1,7 +1,6 @@
 import Camera from "../camera";
 
 export type UpdateContext = {
-    timeScale: number;
     deltaTime: number;
     gravity: number;
 };
