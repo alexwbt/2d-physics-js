@@ -4,12 +4,11 @@ import Force from "./force";
 
 class Physics {
 
-    private mass: number = 1;
+    public mass: number = 1; // kg
+    public velocity: Vec2 = new Vec2(0, 0); // m/s
     private forces: Force[] = [];
     private rotation: number = 0;
-    private velocity: Vec2 = new Vec2(0, 0); // m/s
-
-    private netForce: Vec2 = new Vec2(0, 0);
+    private netForce: Vec2 = new Vec2(0, 0); // newton (kg/ms^2)
 
     public push(force: Force): void {
         this.forces.push(force);
@@ -23,19 +22,22 @@ class Physics {
         return this.velocity.clone();
     }
 
-    public getMass(): number {
-        return this.mass;
+    public getNetForce(): Vec2 {
+         return this.netForce;
     }
 
     public update({ deltaTime, gravity }: UpdateContext): void {
         // update net force
+        const netForceInDeltaTime = new Vec2(0, 0);
         this.netForce = new Vec2(0, 0);
         if (this.forces.length > 0) {
             let count = 0;
             for (const force of this.forces) {
-                this.netForce.addVec(mulVec(force, deltaTime));
+                netForceInDeltaTime.addVec(mulVec(force, deltaTime));
+                this.netForce.addVec(force);
                 count++;
             }
+            netForceInDeltaTime.devVec(count);
             this.netForce.devVec(count);
 
             this.forces = this.forces.filter(force => {
@@ -45,7 +47,7 @@ class Physics {
         }
 
         // update velocity in m/s
-        const acceleration = mulVec(addVec(this.netForce, new Vec2(0, gravity)), this.mass);
+        const acceleration = addVec(devVec(netForceInDeltaTime, this.mass), new Vec2(0, gravity));
         this.velocity.addVec(acceleration);
     }
 

@@ -13,12 +13,13 @@ class Space {
     private entities: Entity[] = [];
 
     constructor() {
-        const obj1 = new Entity(-5, 0, new Circle(1));
+        const obj1 = new Entity(-3, 0, new Circle(1));
         // obj1.physics.push(new Force(0, -9.81, 0.02));
-        obj1.physics.push(new Force(1, 0, 0.5));
+        obj1.physics.push(new Force(2, 0, 0.5));
+        // obj1.physics.mass = 2;
         this.entities.push(obj1);
 
-        const obj2 = new Entity(5, 0, new Circle(1));
+        const obj2 = new Entity(3, 1, new Circle(1));
         // obj2.physics.push(new Force(0, -9.81, 0, true));
         this.entities.push(obj2);
     }
@@ -27,13 +28,7 @@ class Space {
         for (const entity of this.entities)
             entity.update({ deltaTime, gravity: this.gravity * deltaTime });
 
-        forEachUniquePair(this.entities, (e1, e2) => {
-            const { collide: c, push1: p1, push2: p2 } = collide(e1, e2);
-            if (c) {
-                e1.physics.push(new Force(p1.x, p1.y));
-                e2.physics.push(new Force(p2.x, p2.y));
-            }
-        });
+        forEachUniquePair(this.entities, collide);
     }
 
     public render(context: RenderContext): void {

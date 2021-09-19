@@ -34,13 +34,22 @@ class Entity extends Vec2 {
         ctx.rotate(-rotation);
 
         if (debug) {
-            // render velocity
+            // render velocity (m/s)
             const v = mulVec(this.physics.getVelocity(), scale);
             ctx.beginPath();
             ctx.moveTo(0, 0);
             ctx.lineTo(v.x, v.y);
             ctx.strokeStyle = 'red';
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            // render net force (newton) (kg*ms^-2)
+            const nf = mulVec(this.physics.getNetForce(), scale);
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(nf.x, nf.y);
+            ctx.strokeStyle = 'rgba(150, 150, 255, 0.5)';
+            ctx.lineWidth = 3;
             ctx.stroke();
         }
         ctx.translate(-origin.x, -origin.y);
