@@ -1,8 +1,13 @@
+import Circle from "particle/circle";
+import Rectangle from "particle/rectangle";
 import "styles/index.scss";
+import Force from "utils/force";
+import { Vec2 } from "utils/vector";
 import Camera from "./camera";
 import Space from "./space";
 
-const instance = new Space();
+const debug = true;
+
 const camera = new Camera(0, 0, 0, 0);
 camera.scale = 40;
 
@@ -14,7 +19,16 @@ window.addEventListener('wheel', e => {
 const canvas = document.getElementById('main-canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d');
 
-const debug = true;
+const instance = new Space();
+
+const p1 = new Circle(5, 0);
+// p1.push(new Force(0, 9.81, 0, true));
+instance.spawn(p1);
+
+const p2 = new Rectangle(0, 0, 2, 2);
+p2.push(new Force(2, 2, 0.5));
+p2.push(new Force(4, 0, 0.5, false, new Vec2(0, 1)));
+instance.spawn(p2);
 
 let startTime = Date.now();
 const render = () => {

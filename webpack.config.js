@@ -21,9 +21,10 @@ module.exports = ({ production }) => {
         resolve: {
             extensions: ['.ts', '.js'],
             alias: {
-                entity: path.resolve(__dirname, 'src/game/entity/'),
-                physics: path.resolve(__dirname, 'src/game/physics/'),
-                shape: path.resolve(__dirname, 'src/game/shape/'),
+                collision: path.resolve(__dirname, 'src/game/collision/'),
+                particle: path.resolve(__dirname, 'src/game/particle/'),
+                // physics: path.resolve(__dirname, 'src/game/physics/'),
+                // shape: path.resolve(__dirname, 'src/game/shape/'),
                 utils: path.resolve(__dirname, 'src/game/utils/'),
                 styles: path.resolve(__dirname, 'src/styles/')
             }

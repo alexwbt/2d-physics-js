@@ -29,6 +29,9 @@ export class Vec2 implements IVec2 {
     public mag(): number {
         return Math.sqrt(this.x * this.x + this.y * this.y);
     }
+    public equals(v2: Vec2): boolean {
+        return this.x === v2.x && this.y === v2.y;
+    }
 }
 
 export const addVec = (v1: IVec2, v2: IVec2): Vec2 =>
