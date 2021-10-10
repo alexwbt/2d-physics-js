@@ -32,6 +32,9 @@ export class Vec2 implements IVec2 {
     public equals(v2: Vec2): boolean {
         return this.x === v2.x && this.y === v2.y;
     }
+    public dot(v: Vec2): number {
+        return this.x * v.x + this.y * v.y;
+    }
 }
 
 export const addVec = (v1: IVec2, v2: IVec2): Vec2 =>
