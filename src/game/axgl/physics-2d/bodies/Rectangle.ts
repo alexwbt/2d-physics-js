@@ -1,13 +1,13 @@
-import { RenderContext } from "utils/context";
-import Body from "./body";
+import { RenderContext } from "axgl/utils/context";
+import Body from "./Body";
 
-class Rectangle extends Body {
+export default class Rectangle extends Body {
 
     private width: number;
     private height: number;
 
-    constructor(x: number, y: number, width: number, height: number, mass: number = 0) {
-        super(x, y, mass <= 0 ? width * height : mass);
+    constructor(x: number, y: number, width: number, height: number, mass: number = NaN) {
+        super(x, y, isNaN(mass) ? width * height : mass);
         this.width = width;
         this.height = height;
     }
@@ -25,5 +25,3 @@ class Rectangle extends Body {
     }
 
 }
-
-export default Rectangle;

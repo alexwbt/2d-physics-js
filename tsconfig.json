@@ -10,18 +10,7 @@
         "downlevelIteration": true,
         "baseUrl": ".",
         "paths": {
-            "collision": ["./src/game/collision"],
-            "collision/*": ["./src/game/collision/*"],
-            "particle": ["./src/game/particle"],
-            "particle/*": ["./src/game/particle/*"],
-            // "physics": ["./src/game/physics"],
-            // "physics/*": ["./src/game/physics/*"],
-            // "shape": ["./src/game/shape"],
-            // "shape/*": ["./src/game/shape/*"],
-            "utils": ["./src/game/utils"],
-            "utils/*": ["./src/game/utils/*"],
-            "styles": ["./src/styles"],
-            "styles/*": ["./src/styles/*"],
+            "axgl/*": ["src/game/axgl/*"],
         }
     },
     "exclude": [

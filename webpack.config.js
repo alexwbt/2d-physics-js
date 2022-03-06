@@ -21,12 +21,7 @@ module.exports = ({ production }) => {
         resolve: {
             extensions: ['.ts', '.js'],
             alias: {
-                collision: path.resolve(__dirname, 'src/game/collision/'),
-                particle: path.resolve(__dirname, 'src/game/particle/'),
-                // physics: path.resolve(__dirname, 'src/game/physics/'),
-                // shape: path.resolve(__dirname, 'src/game/shape/'),
-                utils: path.resolve(__dirname, 'src/game/utils/'),
-                styles: path.resolve(__dirname, 'src/styles/')
+                axgl: path.resolve(__dirname, 'src/game/axgl/'),
             }
         },
         plugins: [

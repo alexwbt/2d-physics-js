@@ -1,6 +1,6 @@
-import { IVec2, Rect } from "utils/vector";
+import { IVec2, Rect } from "axgl/utils/vector";
 
-class Camera extends Rect {
+export default class Camera extends Rect {
     public scale = 1;
 
     public screen = (pos: IVec2): IVec2 => {
@@ -10,5 +10,3 @@ class Camera extends Rect {
         };
     };
 }
-
-export default Camera;

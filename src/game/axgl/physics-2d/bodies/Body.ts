@@ -1,7 +1,7 @@
-import Particle from "particle";
-import { RenderContext, UpdateContext } from "utils/context";
+import Particle from "axgl/physics-2d/Particle";
+import { RenderContext, UpdateContext } from "axgl/utils/context";
 
-abstract class Body extends Particle {
+export default abstract class Body extends Particle {
 
     private rotation: number = 0; // radians
     private momentOfInertia: number = 0;
@@ -16,7 +16,7 @@ abstract class Body extends Particle {
         super.update(context);
 
         const { deltaTime } = context;
-        const torque = this.forces.torque();
+        const torque = this.forces_.torque();
 
         // angular acceleration = torque / moment of inertia
         // (analogous to acceleration = force / mass)
@@ -48,5 +48,3 @@ abstract class Body extends Particle {
     protected abstract renderBody(context: RenderContext): void;
 
 }
-
-export default Body;

@@ -1,7 +1,7 @@
-// import { collide } from "collision";
-import Particle from "particle";
-import { forEachUniquePair } from "utils/array";
-import { RenderContext } from "utils/context";
+import { collide } from "axgl/physics-2d/collision";
+import Particle from "axgl/physics-2d/Particle";
+import { forEachUniquePair } from "axgl/utils/array";
+import { RenderContext } from "axgl/utils/context";
 
 class Space {
 
@@ -18,7 +18,7 @@ class Space {
         for (const particle of this.particles)
             particle.update({ deltaTime, gravity: this.gravity });
 
-        // forEachUniquePair(this.particles, collide);
+        forEachUniquePair(this.particles, collide);
     }
 
     public render(context: RenderContext): void {

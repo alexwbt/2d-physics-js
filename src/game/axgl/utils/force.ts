@@ -1,6 +1,6 @@
-import { Vec2 } from "utils/vector";
+import { Vec2 } from "axgl/utils/vector";
 
-class Force extends Vec2 {
+export default class Force extends Vec2 {
 
     private time: number;
     private immortal: boolean;
@@ -67,7 +67,7 @@ export class ForceManager {
     public for(offset: Vec2, cb: (force: Force) => void): number {
         const index = this.indexOf(offset);
         let count = 0;
-        for (const force of this.forces[index]) {
+        for (const force of this.forces[index] || []) {
             cb(force);
             count++;
         }
@@ -114,5 +114,3 @@ export class ForceManager {
         }
     }
 }
-
-export default Force;

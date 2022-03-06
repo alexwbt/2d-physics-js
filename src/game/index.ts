@@ -1,10 +1,10 @@
-import Circle from "particle/circle";
-import Rectangle from "particle/rectangle";
-import "styles/index.scss";
-import Force from "utils/force";
-import { Vec2 } from "utils/vector";
-import Camera from "./camera";
-import Space from "./space";
+import Camera from "axgl/camera";
+import Circle from "axgl/physics-2d/bodies/Circle";
+import Rectangle from "axgl/physics-2d/bodies/Rectangle";
+import Space from "axgl/space";
+import Force from "axgl/utils/force";
+import { Vec2 } from "axgl/utils/vector";
+import "../styles/index.scss";
 
 const debug = true;
 
@@ -25,7 +25,7 @@ const p1 = new Circle(5, 0);
 // p1.push(new Force(0, 9.81, 0, true));
 instance.spawn(p1);
 
-const p2 = new Rectangle(0, 0, 2, 2);
+const p2 = new Circle(0, 0, 2, 2);
 p2.push(new Force(2, 2, 0.5));
 p2.push(new Force(4, 0, 0.5, false, new Vec2(0, 1)));
 instance.spawn(p2);
